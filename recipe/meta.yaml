@@ -27,7 +27,7 @@ requirements:
 
 test:
   commands:
-    - "flake8 --version | grep naming:"
+    - "flake8 --version | grep naming:"  # [not win]
 
 about:
   home: https://github.com/PyCQA/pep8-naming
