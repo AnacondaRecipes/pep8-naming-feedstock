@@ -19,14 +19,20 @@ requirements:
   host:
     - python
     - pip
-
+    - setuptools
+    - wheel
   run:
     - python
-    - flake8
+    - flake8 >=3.9.1
     - flake8-polyfill >=1.0.2,<2
 
 test:
+  imports:
+    - pep8ext_naming
+  requires:
+    - pip
   commands:
+    - pip check
     - "flake8 --version | grep naming:"  # [not win]
 
 about:
