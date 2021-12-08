@@ -12,6 +12,8 @@ source:
   sha256: {{ sha256 }}
 
 build:
+  skip: True  # [py<37]
+  noarch: python
   script: python -m pip install --no-deps --ignore-installed .
   number: 0
 
@@ -22,7 +24,7 @@ requirements:
     - setuptools
     - wheel
   run:
-    - python
+    - python >=3.7
     - flake8 >=3.9.1
     - flake8-polyfill >=1.0.2,<2
 
@@ -30,6 +32,7 @@ test:
   imports:
     - pep8ext_naming
   requires:
+    - python <3.10
     - pip
   commands:
     - pip check
