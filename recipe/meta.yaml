@@ -42,7 +42,7 @@ about:
   license_family: MIT
   license_file: LICENSE
   summary: 'Plug-in for flake 8 to check the PEP-8 naming conventions'
-  description: This module provides a plugin for flake8, the Python code checker.
+  description: This module provides a plugin for flake8, the Python code checker
   dev_url: https://github.com/PyCQA/pep8-naming
   doc_url: https://github.com/PyCQA/pep8-naming/blob/main/README.rst
 
