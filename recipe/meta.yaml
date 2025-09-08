@@ -1,41 +1,40 @@
 {% set name = "pep8-naming" %}
-{% set version = "0.12.1" %}
-{% set sha256 = "bb2455947757d162aa4cad55dba4ce029005cd1692f2899a21d51d8630ca7841" %}
+{% set version = "0.15.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
+  sha256: f6f4a499aba2deeda93c1f26ccc02f3da32b035c8b2db9696b730ef2c9639d29
 
 build:
-  noarch: python
-  script: python -m pip install --no-deps --ignore-installed .
   number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: true  # [py<39]
 
 requirements:
   host:
-    - python
     - pip
-    - setuptools
+    - python
     - wheel
+    - setuptools
   run:
     - python
-    - flake8 >=3.9.1
-    - flake8-polyfill >=1.0.2,<2
+    - flake8 >=5.0.0
 
 test:
+  source_files:
+    - run_tests.py
+    - testsuite
   imports:
     - pep8ext_naming
-  requires:
-    - python <3.10
-    - pip
   commands:
     - pip check
-    - "flake8 --version | grep naming:"  # [not win]
+    - python run_tests.py
+  requires:
+    - pip
 
 about:
   home: https://github.com/PyCQA/pep8-naming
@@ -43,8 +42,9 @@ about:
   license_family: MIT
   license_file: LICENSE
   summary: 'Plug-in for flake 8 to check the PEP-8 naming conventions'
+  description: This module provides a plugin for flake8, the Python code checker.
   dev_url: https://github.com/PyCQA/pep8-naming
-  doc_url: https://pypi.org/project/pep8-naming/
+  doc_url: https://github.com/PyCQA/pep8-naming/blob/main/README.rst
 
 extra:
   recipe-maintainers:
